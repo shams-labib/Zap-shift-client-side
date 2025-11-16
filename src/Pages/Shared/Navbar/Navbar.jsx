@@ -9,7 +9,10 @@ const Navbar = () => {
         <NavLink to={""}>Services</NavLink>
       </li>
       <li>
-        <NavLink to={""}>Services</NavLink>
+        <NavLink to={""}>About Us</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/coverage"}>Coverage</NavLink>
       </li>
     </>
   );
