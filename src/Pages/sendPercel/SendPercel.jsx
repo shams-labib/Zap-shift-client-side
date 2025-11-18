@@ -2,14 +2,19 @@ import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxios/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth/useAuth";
 
 const SendPercel = () => {
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
+
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const serviceCenter = useLoaderData();
   const regionsDeulicate = serviceCenter.map((c) => c.region);
@@ -58,11 +63,17 @@ const SendPercel = () => {
       confirmButtonText: "Yes, take it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+        // save the parcel info to the database
+
+        axiosSecure
+          .post("/parcels", data)
+          .then((res) => console.log("after saving data", res.data));
+
+        // Swal.fire({
+        //   title: "Deleted!",
+        //   text: "Your file has been deleted.",
+        //   icon: "success",
+        // });
       }
     });
   };
@@ -132,6 +143,7 @@ const SendPercel = () => {
             <input
               {...register("senderName")}
               type="text"
+              defaultValue={user?.displayName}
               className="input outline-none w-full"
               placeholder="Sender Name"
             />
@@ -141,6 +153,7 @@ const SendPercel = () => {
             </label>
             <input
               {...register("senderEmail")}
+              defaultValue={user?.email}
               type="text"
               className="input outline-none w-full"
               placeholder="Sender Email"
