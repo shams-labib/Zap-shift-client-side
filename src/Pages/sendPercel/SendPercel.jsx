@@ -160,6 +160,7 @@ const SendPercel = () => {
             <input
               {...register("senderEmail")}
               defaultValue={user?.email}
+              readOnly
               type="text"
               className="input outline-none w-full"
               placeholder="Sender Email"
