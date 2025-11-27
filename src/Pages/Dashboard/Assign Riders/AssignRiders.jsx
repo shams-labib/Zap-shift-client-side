@@ -43,6 +43,7 @@ const AssignRiders = () => {
       riderEmail: rider.email,
       riderName: rider.name,
       parcelId: rider._id,
+      trackingId: selectedParcel.trackingId,
     };
 
     axiosSecure

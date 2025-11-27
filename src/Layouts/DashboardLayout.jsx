@@ -4,6 +4,8 @@ import { FaMotorcycle, FaRegCreditCard, FaUsers } from "react-icons/fa6";
 import { Link, NavLink, Outlet } from "react-router";
 import UseRole from "../Hooks/userRole/UseRole";
 import { RiEBikeFill } from "react-icons/ri";
+import { FaTasks } from "react-icons/fa";
+import { SiGoogletasks } from "react-icons/si";
 
 const DashboardLayout = () => {
   const { role } = UseRole();
@@ -98,6 +100,40 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
+
+            {/* Rider role */}
+            {role === "rider" && (
+              <>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assigned Deliveries"
+                    to={"/dashboard/assigned-deliveries"}
+                  >
+                    <FaTasks size={17} />
+
+                    <span className="is-drawer-close:hidden">
+                      Assigned Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Completed Deliveries"
+                    to={"/dashboard/completed-deliveries"}
+                  >
+                    <SiGoogletasks size={17} />
+
+                    <span className="is-drawer-close:hidden">
+                      Completed Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* Admin only routes */}
 
             {role === "admin" && (
               <>
