@@ -73,6 +73,7 @@ const Rider = () => {
             <input
               {...register("email")}
               defaultValue={user?.email}
+              readOnly
               type="text"
               className="input outline-none w-full"
               placeholder="Rider Email"
